@@ -14,7 +14,7 @@ struct QuoteView: View {
     
     var body: some View {
         GeometryReader{ geo in
-            // First layer
+            // First ZStack layer
             ZStack{
                 Image(show.lowerNoSpaces)
                     .resizable()
@@ -47,6 +47,7 @@ struct QuoteView: View {
                                 .onTapGesture {
                                     showCharacterInfo.toggle()
                                 }
+                                // open the CharacterView with the show value and the character
                                 .sheet(isPresented: $showCharacterInfo){
                                     CharacterView(show: show, character: data.character)
                                 }
@@ -71,6 +72,7 @@ struct QuoteView: View {
                     
                     Button{
                         Task{
+                            // Get the data from the viewModel for the quote and the character
                             await viewModel.getData(for:show)
                         }
                     } label:{
